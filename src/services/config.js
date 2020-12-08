@@ -3,30 +3,28 @@ import 'firebase/firestore'
 import "firebase/storage";
 import "firebase/auth"
 
-  var firebaseConfig = {
-    apiKey: "AIzaSyDdV1QjGYDK39W6AihUNTbLU47Q-FUeqIY",
-    authDomain: "demoapp-40b20.firebaseapp.com",
-    databaseURL: "https://demoapp-40b20.firebaseio.com",
-    projectId: "demoapp-40b20",
-    storageBucket: "demoapp-40b20.appspot.com",
-    messagingSenderId: "325998144331",
-    appId: "1:325998144331:web:96e9d42eac7e46de2e16ce",
-    measurementId: "G-DFRE1XNX1G"
-  };
-  
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+var firebaseConfig = {
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  appId: process.env.REACT_APP_APP_ID,
+};
 
-  const storage = firebase.storage();
-  const storeFire = firebase.firestore();
-  storeFire.settings({timestampsInSnapshots: true});
-  const auth  = firebase.auth() 
-  console.log('user data', auth.phoneNumber)
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+const storage = firebase.storage();
+const storeFire = firebase.firestore();
+storeFire.settings({ timestampsInSnapshots: true });
+const auth = firebase.auth()
+console.log(auth)
 //   logout = () => {
 //     firebase.auth().signOut();
 // }
- 
 
-  const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-  export { storage, storeFire, timestamp, firebase as default };
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+export { storage, storeFire, timestamp, firebase, auth as default, auth };

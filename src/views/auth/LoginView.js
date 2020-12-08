@@ -41,7 +41,7 @@ const LoginView = () => {
       firebase.auth.PhoneAuthProvider.PROVIDER_ID,
     ],
     tosUrl: '/app/dashboard',
-    privacyPolicyUrl: function() {
+    privacyPolicyUrl: function () {
       window.location.assign('<your-privacy-policy-url>');
     }
   };
@@ -49,7 +49,7 @@ const LoginView = () => {
   var ui = new firebaseui.auth.AuthUI(firebase.auth());
   ui.start('#firebaseui-auth-container', uiConfig);
 
-  // const setUpRecaptcha = () =>{
+  // const setUpRecaptcha = () => {
   //   window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
   //     'size': 'invisible',
   //     'callback': function (response) {
@@ -85,13 +85,13 @@ const LoginView = () => {
       title="Login"
     >
       <div id="firebaseui-auth-container"></div>
-      {/* <Box
+      <Box
         display="flex"
         flexDirection="column"
         height="100%"
         justifyContent="center"
       >
-        <Container maxWidth="sm">
+        {/* <Container maxWidth="sm">
           <Grid container>
             <form onSubmit={onSignInSubmit}>
               <div id="recaptcha-container"></div>
@@ -112,8 +112,8 @@ const LoginView = () => {
               </Card>
             </form>
           </Grid>
-        </Container>
-      </Box> */}
+        </Container> */}
+      </Box>
     </Page>
   );
 };

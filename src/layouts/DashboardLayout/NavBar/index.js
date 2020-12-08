@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import TableChartIcon from '@material-ui/icons/TableChart';
 import PropTypes from 'prop-types';
 import {
   Avatar,
@@ -21,8 +22,8 @@ import {
   User as UserIcon,
   UserPlus as UserPlusIcon,
   Users as UsersIcon
-} from 'react-feather';import
- AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+} from 'react-feather'; import
+AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import NavItem from './NavItem';
 
 const user = {
@@ -48,14 +49,13 @@ const items = [
     title: 'Addblog'
   },
   {
-    href: '/app/images',
-    icon: AddCircleOutlineIcon,
-    title: 'ImageGrid'
-  },
-  {
     href: '/app/products',
     icon: ShoppingBagIcon,
     title: 'Products'
+  }, {
+    href: '/app/table',
+    icon: TableChartIcon,
+    title: 'Tables'
   },
   {
     href: '/app/account',
@@ -76,11 +76,6 @@ const items = [
     href: '/register',
     icon: UserPlusIcon,
     title: 'Register'
-  },
-  {
-    href: '/register',
-    icon: UserPlusIcon,
-    title: 'Logout'
   },
   {
     href: '/404',
@@ -151,6 +146,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       <Divider />
       <Box p={2}>
         <List>
+
           {items.map((item) => (
             <NavItem
               href={item.href}
@@ -208,6 +204,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           open={openMobile}
           variant="temporary"
         >
+
           {content}
         </Drawer>
       </Hidden>
@@ -231,7 +228,7 @@ NavBar.propTypes = {
 };
 
 NavBar.defaultProps = {
-  onMobileClose: () => {},
+  onMobileClose: () => { },
   openMobile: false
 };
 

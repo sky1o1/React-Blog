@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route } from "react-router-dom";
 import firebase from "firebase";
-import {getBlog} from '../../../services/blog';
+import { getBlog } from '../../../services/blog';
 import {
   Box,
   Container,
@@ -30,13 +30,13 @@ const ProductList = () => {
   const classes = useStyles();
   const [data, setData] = useState([])
 
-  useEffect( () => {
-     getBlog().then(blogList => setData(blogList))
-}, []) 
+  useEffect(() => {
+    getBlog().then(blogList => setData(blogList))
+  }, [])
 
-var user = firebase.auth().currentUser;
-console.log('user data', user)
- console.log('data ui',data)
+  var user = firebase.auth().currentUser;
+  console.log('user data', user)
+  console.log('data ui', data)
 
   return (
     <Page
@@ -66,11 +66,12 @@ console.log('user data', user)
                   <Details blog={data.title} />
                 </Route> */}
               </Grid>
+
             ))}
 
-      
-                  <Details />
-        
+
+            {/* <Details /> */}
+
           </Grid>
         </Box>
         {/* <Box

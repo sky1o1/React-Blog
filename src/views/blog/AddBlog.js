@@ -12,7 +12,7 @@ import {
   makeStyles,
   Input
 } from '@material-ui/core';
-import {createBlog} from '../../services/blog'
+import { createBlog } from '../../services/blog'
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -21,11 +21,11 @@ const useStyles = makeStyles(() => ({
 const AddBlog = ({ className, ...rest }) => {
 
   const classes = useStyles();
-  
+
   const [values, setValues] = useState({
     title: '',
     description: '',
-    image_url:'',
+    image_url: '',
     createdAt: '',
   });
 
@@ -39,18 +39,19 @@ const AddBlog = ({ className, ...rest }) => {
   };
 
   const handleChangeI = (event) => {
-      let file = event.target.files[0]
-    if (file){
-        setImage(file);
+    let file = event.target.files[0]
+    if (file) {
+      setImage(file);
     }
   };
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    try{
-      await createBlog(values.title,values.description,image)
+    try {
+      await createBlog(values.title, values.description, image)
+      alert('Successfully added')
 
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      alert(error)
     }
 
   };
@@ -117,10 +118,10 @@ const AddBlog = ({ className, ...rest }) => {
                 onChange={handleChangeI}
               />
             </Grid>
-            
-            
-            
-            
+
+
+
+
           </Grid>
         </CardContent>
         <Divider />
