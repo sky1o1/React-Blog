@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/core';
 import GlobalStyles from 'src/components/GlobalStyles';
 import 'src/mixins/chartjs';
 import theme from 'src/theme';
-import {routes, homeroute} from 'src/routes';
+import { routes, homeroute } from 'src/routes';
 import firebase, { auth } from './services/config'
 import { AuthProvider } from '../src/common/auth'
 import PrivateRoute from '../src/common/PrivateRoute'
@@ -32,29 +32,24 @@ const App = () => {
     })
   }, [])
 
-  console.log('cureent user in app',currentUser)
+  console.log('cureent user in app', currentUser)
 
 
   return (
     <>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {/* <PrivateRoute path="/app/dashboard" component={routing} /> */}
-      {
-        currentUser?
-        <>
-        <h2>logged in</h2>
-         {routing}
-        </>
-        :
-        <>
-           <h2>logged out</h2>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        {/* <PrivateRoute path="/app/dashboard" component={routing} /> */}
+
+
+        {routing}
+
         {homeRouting}
-        </>
-      }
-     
-     </ThemeProvider>
-       </>
+
+
+
+      </ThemeProvider>
+    </>
   );
 };
 

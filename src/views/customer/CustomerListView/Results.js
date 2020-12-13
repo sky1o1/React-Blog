@@ -44,6 +44,7 @@ const Results = ({ className, customers, ...rest }) => {
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
+
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
     let newSelectedCustomerIds = [];
@@ -77,9 +78,9 @@ const Results = ({ className, customers, ...rest }) => {
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <PerfectScrollbar>
+      <PerfectScrollbar >
         <Box minWidth={1050}>
-          <Table>
+          <Table >
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox">

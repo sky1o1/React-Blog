@@ -24,6 +24,7 @@ const TopBar = ({ className, ...rest }) => {
       className={clsx(classes.root, className)}
       elevation={0}
       {...rest}
+      position="static"
     >
       <Toolbar className={classes.toolbar}>
         <RouterLink to="/">

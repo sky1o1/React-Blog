@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, colors } from '@material-ui/core';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
 import { auth } from '../../services/config'
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,10 +15,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   wrapper: {
+    backgroundColor: 'red',
+    height: '90vh',
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
-    paddingTop: 64,
+    marginTop: 64,
     [theme.breakpoints.up('lg')]: {
       paddingLeft: 256
     }
@@ -42,6 +45,8 @@ const DashboardLayout = () => {
     console.log("userPhone", auth.currentUser.phoneNumber)
   }
 
+
+
   return (
     <div className={classes.root}>
       <TopBar onMobileNavOpen={() => setMobileNavOpen(true)} />
@@ -49,7 +54,7 @@ const DashboardLayout = () => {
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}
       />
-      <div className={classes.wrapper}>
+      <div className={classes.wrapper}  >
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Outlet />

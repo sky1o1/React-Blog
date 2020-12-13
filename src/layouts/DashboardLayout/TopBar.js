@@ -31,15 +31,15 @@ const useStyles = makeStyles(() => ({
 
 
 
-const Logout = () =>{
-  
-    // const navigate = useNavigate();
+const Logout = () => {
+
+  // const navigate = useNavigate();
   firebase.auth().signOut().then(function () {
-      console.log('logged out')
-      // navigate('/login')
-      
+    console.log('logged out')
+    // navigate('/login')
+
   }).catch(function (error) {
-      console.log('error logging out')
+    console.log('error logging out')
   });
   console.log('logged out')
 }
@@ -66,7 +66,7 @@ const TopBar = ({
         setCurrentUser(null)
       }
     })
-  },[setCurrentUser])
+  }, [setCurrentUser])
   return (
     <AppBar
       className={clsx(classes.root, className)}
@@ -77,7 +77,6 @@ const TopBar = ({
         <RouterLink to="/">
           <Logo />
         </RouterLink>
-  <h1>Welcome: {currentUser.phoneNumber} </h1>
         <Box flexGrow={1} />
         <Hidden mdDown>
           <IconButton color="inherit">
@@ -95,10 +94,10 @@ const TopBar = ({
               console.log('logged out')
               navigate('/login')
               window.location.reload(true)
-              
-          }).catch(function (error) {
+
+            }).catch(function (error) {
               console.log('error logging out')
-          });
+            });
           }}>
             <ExitToAppIcon></ExitToAppIcon> Logout
           </IconButton>

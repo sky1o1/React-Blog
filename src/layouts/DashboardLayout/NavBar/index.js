@@ -56,6 +56,10 @@ const items = [
     href: '/app/table',
     icon: TableChartIcon,
     title: 'Tables'
+  }, {
+    href: '/app/datetable',
+    icon: TableChartIcon,
+    title: 'Date Table'
   },
   {
     href: '/app/account',

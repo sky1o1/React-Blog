@@ -15,6 +15,7 @@ import AddBlog from 'src/views/blog/AddBlog'
 import ImageGrid from './components/ImageGrid';
 import Details from './views/product/Details';
 import Tables from './views/Table/Table'
+import DateRangeTable from './views/Table/DateRangeTable'
 
 const homeroute = [
   {
@@ -43,6 +44,7 @@ const routes = [
       { path: 'settings', element: <SettingsView /> },
       { path: '/product/details', element: <Details /> },
       { path: 'table', element: <Tables /> },
+      { path: 'datetable', element: <DateRangeTable /> },
       // { path: '*', element: <Navigate to="/404" /> }
     ]
   }

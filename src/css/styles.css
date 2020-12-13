@@ -1,0 +1,30 @@
+:root {
+  /* --danger: #f72222; */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dp-container {
+  display: flex;
+}
+
+.dp-group {
+  /* border: 1px solid red; */
+  margin-right: 10px;
+}
+
+.dp-item {
+  padding: 10px 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 3px solid #303030;
+}
+.dp-item--error {
+  border: 3px solid var(--danger);
+}
+
+.dp-error {
+  margin: 0;
+  font-size: 16px;
+  color: var(--danger);
+  padding-top: 5px;
+}

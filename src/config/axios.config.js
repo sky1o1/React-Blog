@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: `https://dummyapi.io/data/api/user?page=1&limit=50`,
+    baseURL: `http://localhost:3004`,
     headers: {
-        'app-id': process.env.REACT_APP_APP_ID,
+        // 'app-id': '5fd0f8e21f6d1da6be2625b4',
         Accept: 'application/json',
     }
 })
