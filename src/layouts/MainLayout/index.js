@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     height: '100%',
     overflow: 'hidden',
-    width: '100%'
   },
   wrapper: {
     display: 'flex',
@@ -33,16 +32,20 @@ const MainLayout = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <TopBar />
-      <div className={classes.wrapper}>
-        <div className={classes.contentContainer}>
-          <div className={classes.content}>
-            <Outlet />
-          </div>
-        </div>
-      </div>
-    </div>
+    // <div className={classes.root}>
+    //   {/* <TopBar /> */}
+    //   {/* <div className={classes.wrapper}>
+    //     <div className={classes.contentContainer}>
+    //       <div className={classes.content}>
+    //         <Outlet />
+    //       </div>
+    //     </div>
+    //   </div> */}
+
+
+
+    // </div>
+    <Outlet />
   );
 };
 

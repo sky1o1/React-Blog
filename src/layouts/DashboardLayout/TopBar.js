@@ -4,7 +4,6 @@ import firebase from "firebase";
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-// import  logout  from '../../views/auth/Logout'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {
   AppBar,
@@ -93,7 +92,6 @@ const TopBar = ({
             firebase.auth().signOut().then(function () {
               console.log('logged out')
               navigate('/login')
-              window.location.reload(true)
 
             }).catch(function (error) {
               console.log('error logging out')

@@ -35,8 +35,6 @@ const ProductList = () => {
   }, [])
 
   var user = firebase.auth().currentUser;
-  console.log('user data', user)
-  console.log('data ui', data)
 
   return (
     <Page
@@ -62,15 +60,8 @@ const ProductList = () => {
                   className={classes.productCard}
                   documents={doc}
                 />
-                {/* <Route path="/product/details">
-                  <Details blog={data.title} />
-                </Route> */}
               </Grid>
-
             ))}
-
-
-            {/* <Details /> */}
 
           </Grid>
         </Box>

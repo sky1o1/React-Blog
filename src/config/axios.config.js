@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: `http://localhost:3004`,
+    baseURL: `https://cat-fact.herokuapp.com`,
     headers: {
         // 'app-id': '5fd0f8e21f6d1da6be2625b4',
         Accept: 'application/json',

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import {
   Avatar,
   Box,
@@ -25,7 +26,6 @@ import {
 } from 'react-feather'; import
 AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import NavItem from './NavItem';
-
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
   jobTitle: 'Senior Developer',
@@ -52,6 +52,14 @@ const items = [
     href: '/app/products',
     icon: ShoppingBagIcon,
     title: 'Products'
+  }, {
+    href: '/app/brands',
+    icon: ShoppingBagIcon,
+    title: 'Brands'
+  }, {
+    href: '/app/addBrands',
+    icon: TableChartIcon,
+    title: 'Add Brands'
   }, {
     href: '/app/table',
     icon: TableChartIcon,
@@ -107,6 +115,8 @@ const useStyles = makeStyles(() => ({
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
+  const profile = useSelector(state => state.profile)
+  console.log('profile', profile.fullName)
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -130,7 +140,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         <Avatar
           className={classes.avatar}
           component={RouterLink}
-          src={user.avatar}
+          src={profile.imageUrl}
           to="/app/account"
         />
         <Typography
@@ -138,13 +148,13 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           color="textPrimary"
           variant="h5"
         >
-          {user.name}
+          {profile.fullName}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body2"
         >
-          {user.jobTitle}
+          {profile.phoneNumber}
         </Typography>
       </Box>
       <Divider />

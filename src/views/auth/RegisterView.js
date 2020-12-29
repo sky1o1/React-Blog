@@ -1,206 +1,206 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import firebase from "firebase";
+import { createProfile } from '../../services/profile';
+import { setProfile } from '../../store/actions'
+import { useSelector, useDispatch } from 'react-redux';
+import '../../css/styles.css'
 import {
   Box,
   Button,
+  Card,
+  CardActions,
+  CardContent,
   Checkbox,
   Container,
   FormHelperText,
   Link,
   TextField,
   Typography,
-  makeStyles
+  makeStyles,
+  Input
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
-    height: '100%',
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3)
-  }
+    // height: '100%',
+    paddingBottom: theme.spacing(5),
+    paddingTop: theme.spacing(5),
+    paddingLeft: theme.spacing(5),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
 }));
 
+
+const initialValues = {
+  email: '',
+  fullName: '',
+  gender: null,
+  image: '',
+  policy: false
+}
+
+
+const validationSchema = Yup.object({
+  fullName: Yup.string().required('Fullname is required'),
+  email: Yup.string().email('Invalid email format').required('Fullname is required'),
+
+}
+)
+
 const RegisterView = () => {
+
   const classes = useStyles();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const profile = useSelector(state => state.profile)
+  const formik = useFormik({
+    initialValues,
+    onSubmit: async (values, onSubmitProps) => {
+      try {
+        const profileSet = await createProfile(values.fullName, values.email, values.gender, values.image, profile.id, profile.phoneNumber, profile.isProfileCompleted)
+        dispatch(setProfile(profileSet))
+        alert('Successfully added')
+        onSubmitProps.setSubmitting(false)
+        navigate('/')
+      } catch (error) {
+        console.log(error)
+      }
+
+    },
+    validationSchema,
+  })
 
   return (
+
     <Page
       className={classes.root}
       title="Register"
     >
+
       <Box
         display="flex"
         flexDirection="column"
         height="100%"
         justifyContent="center"
       >
-        <Container maxWidth="sm">
-          <Formik
-            initialValues={{
-              email: '',
-              firstName: '',
-              lastName: '',
-              password: '',
-              policy: false
-            }}
-            validationSchema={
-              Yup.object().shape({
-                email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                firstName: Yup.string().max(255).required('First name is required'),
-                lastName: Yup.string().max(255).required('Last name is required'),
-                password: Yup.string().max(255).required('password is required'),
-                policy: Yup.boolean().oneOf([true], 'This field must be checked')
-              })
-            }
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
-            }}
-          >
-            {({
-              errors,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-              isSubmitting,
-              touched,
-              values
-            }) => (
-              <form onSubmit={handleSubmit}>
+        <Card maxWidth="sm">
+          <CardContent>
+            <Container maxWidth="sm">
+
+              <form
+                onSubmit={formik.handleSubmit}
+              >
                 <Box mb={3}>
                   <Typography
                     color="textPrimary"
                     variant="h2"
                   >
-                    Create new account
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    gutterBottom
-                    variant="body2"
-                  >
-                    Use your email to create new account
-                  </Typography>
+                    Create your profile
+                </Typography>
                 </Box>
+                {/* <img src={formik.values.photo1} /> */}
+                <Input
+                  type="file"
+                  name="file"
+                  onChange={(event) => {
+                    formik.setFieldValue("image", event.currentTarget.files[0]);
+                  }}
+                />
                 <TextField
-                  error={Boolean(touched.firstName && errors.firstName)}
+                  error={Boolean(formik.touched.fullName && formik.errors.fullName)}
                   fullWidth
-                  helperText={touched.firstName && errors.firstName}
-                  label="First name"
+                  id="fullName"
+                  helperText={formik.touched.fullName && formik.errors.fullName}
+                  label="Full name"
                   margin="normal"
-                  name="firstName"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.firstName}
+                  name="fullName"
+                  onBlur={formik.handleBlur}
+                  value={formik.values.fullName}
+
+                  onChange={formik.handleChange}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.lastName && errors.lastName)}
+                  error={Boolean(formik.touched.email && formik.errors.email)}
                   fullWidth
-                  helperText={touched.lastName && errors.lastName}
-                  label="Last name"
-                  margin="normal"
-                  name="lastName"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
-                  variant="outlined"
-                />
-                <TextField
-                  error={Boolean(touched.email && errors.email)}
-                  fullWidth
-                  helperText={touched.email && errors.email}
+                  helperText={formik.touched.email && formik.errors.email}
                   label="Email Address"
                   margin="normal"
                   name="email"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
                   type="email"
-                  value={values.email}
                   variant="outlined"
                 />
-                <TextField
-                  error={Boolean(touched.password && errors.password)}
-                  fullWidth
-                  helperText={touched.password && errors.password}
-                  label="Password"
-                  margin="normal"
-                  name="password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  type="password"
-                  value={values.password}
-                  variant="outlined"
-                />
-                <Box
-                  alignItems="center"
-                  display="flex"
-                  ml={-1}
+                <FormLabel component="legend">Gender</FormLabel>
+                <RadioGroup aria-label="gender"
+                  value={formik.values.gender}
+                  name="gender"
+                  onChange={formik.handleChange}
+
                 >
-                  <Checkbox
-                    checked={values.policy}
-                    name="policy"
-                    onChange={handleChange}
-                  />
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    I have read the
-                    {' '}
-                    <Link
-                      color="primary"
-                      component={RouterLink}
-                      to="#"
-                      underline="always"
-                      variant="h6"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </Typography>
-                </Box>
-                {Boolean(touched.policy && errors.policy) && (
-                  <FormHelperText error>
-                    {errors.policy}
-                  </FormHelperText>
-                )}
+                  <FormControlLabel value="female" control={<Radio />} label="Female" />
+                  <FormControlLabel value="male" control={<Radio />} label="Male" />
+                  <FormControlLabel value="other" control={<Radio />} label="Other" />
+                </RadioGroup>
+
+
                 <Box my={2}>
                   <Button
                     color="primary"
-                    disabled={isSubmitting}
+                    disabled={!formik.isValid || formik.isSubmitting}
                     fullWidth
                     size="large"
                     type="submit"
                     variant="contained"
                   >
-                    Sign up now
-                  </Button>
+                    Register Profile
+                </Button>
                 </Box>
                 <Typography
                   color="textSecondary"
                   variant="body1"
                 >
                   Have an account?
-                  {' '}
+                {' '}
                   <Link
                     component={RouterLink}
                     to="/login"
                     variant="h6"
                   >
                     Sign in
-                  </Link>
+                </Link>
                 </Typography>
               </form>
-            )}
-          </Formik>
-        </Container>
+            </Container>
+          </CardContent>
+        </Card>
       </Box>
-    </Page>
-  );
-};
+    </Page >
+  )
+}
 
 export default RegisterView;

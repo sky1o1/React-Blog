@@ -99,46 +99,49 @@ const TrafficByDevice = ({ className, ...rest }) => {
           height={300}
           position="relative"
         >
-          <Doughnut
+          {/* <Doughnut
             data={data}
             options={options}
-          />
+          /> */}
+          <iframe width="400" height="300" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTJh6qG3Dfpo9i4HHY3TB_FDQ2LxfadhXnacv3Qmtq1TmXWrJ07qxGVh6DadvD7bgRU_J1sYtuHnTdU/pubchart?oid=826692676&amp;format=interactive"></iframe>
         </Box>
-        <Box
+        {/* <Box
           display="flex"
           justifyContent="center"
           mt={2}
-        >
-          {devices.map(({
+        > */}
+
+        {/* {devices.map(({
             color,
             icon: Icon,
             title,
             value
           }) => (
-            <Box
-              key={title}
-              p={1}
-              textAlign="center"
-            >
-              <Icon color="action" />
-              <Typography
-                color="textPrimary"
-                variant="body1"
+              <Box
+                key={title}
+                p={1}
+                textAlign="center"
               >
-                {title}
-              </Typography>
-              <Typography
-                style={{ color }}
-                variant="h2"
-              >
-                {value}
+                <Icon color="action" />
+                <Typography
+                  color="textPrimary"
+                  variant="body1"
+                >
+                  {title}
+                </Typography>
+                <Typography
+                  style={{ color }}
+                  variant="h2"
+                >
+                  {value}
                 %
               </Typography>
-            </Box>
-          ))}
-        </Box>
+              </Box>
+            ))} */}
+        {/* </Box> */}
       </CardContent>
-    </Card>
+
+    </Card >
   );
 };
 

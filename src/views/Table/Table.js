@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { getAllUser } from '../../services/user'
+import { firebaseAnalytics } from '../../services/config'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,7 +15,10 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import '../../css/styles.css'
 import MaterialTable from 'material-table';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import ReactGa from 'react-ga';
+import Report from '../../analytics/Reports';
 
 const useStyles = makeStyles({
     table: {
@@ -42,10 +46,12 @@ export default function Tables() {
         startDate: null,
         endDate: null
     });
-    console.log(datas)
     const scrollContainer = useRef(null);
 
+
     useEffect(() => {
+        ReactGa.initialize('G-MMLKPSTH1T')
+        ReactGa.pageview(window.location.pathname + window.location.search)
         fetchMyApi(page);
     }, [])
 
@@ -65,7 +71,6 @@ export default function Tables() {
     }
 
 
-
     const onScrollHandler = debounce(() => {
         const container = scrollContainer.current
         if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
@@ -78,6 +83,8 @@ export default function Tables() {
 
     return (
         <>
+
+            {/* <Report /> */}
             {/* <TableContainer className={classes.wrapper} component={Paper} onScroll={onScrollHandler} ref={scrollContainer}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
@@ -103,6 +110,7 @@ export default function Tables() {
             </TableContainer > */}
             <MaterialTable
                 title="Basic Filtering Preview"
+                icons={FilterListIcon}
                 columns={[
                     { title: 'Date', field: 'Date' },
                     { title: 'Price', field: 'Price' },

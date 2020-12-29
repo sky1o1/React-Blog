@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
+import { auth, firebaseAnalytics } from '../../../services/config';
+import { getUserById } from '../../../services/profile';
+import { getProfile } from '../../../services/profile'
+import { useSelector } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 import {
   Avatar,
   Box,
@@ -27,12 +33,22 @@ const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
     height: 100,
-    width: 100
   }
 }));
 
 const Profile = ({ className, ...rest }) => {
   const classes = useStyles();
+  const profile = useSelector(state => state.profile)
+  console.log('firestore connected state', profile)
+
+  auth.onAuthStateChanged(async user => {
+    try {
+      const profileDoc = await getProfile()
+      console.log('profile data view ', profileDoc)
+    } catch (error) {
+      console.log(error)
+    }
+  })
 
   return (
     <Card
@@ -89,4 +105,9 @@ Profile.propTypes = {
   className: PropTypes.string
 };
 
+// export default compose(
+//   firestoreConnect([
+//     { collection: 'profile' }
+//   ])
+// )(Profile);
 export default Profile;

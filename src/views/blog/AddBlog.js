@@ -44,6 +44,7 @@ const AddBlog = ({ className, ...rest }) => {
       setImage(file);
     }
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {

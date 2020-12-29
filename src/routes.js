@@ -11,11 +11,13 @@ import NotFoundView from 'src/views/errors/NotFoundView';
 import ProductListView from 'src/views/product/ProductListView';
 import RegisterView from 'src/views/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
-import AddBlog from 'src/views/blog/AddBlog'
-import ImageGrid from './components/ImageGrid';
+import AddBlog from 'src/views/blog/AddBlog';
+import Brands from 'src/views/brands/';
+import AddBrands from 'src/views/brands/AddBrands'
 import Details from './views/product/Details';
-import Tables from './views/Table/Table'
-import DateRangeTable from './views/Table/DateRangeTable'
+import Tables from './views/Table/Table';
+import DateRangeTable from './views/Table/DateRangeTable';
+import PrivateRoute from './privateRoute';
 
 const homeroute = [
   {
@@ -31,24 +33,29 @@ const homeroute = [
   }
 ]
 
-const routes = [
-  {
-    path: 'app',
-    element: <DashboardLayout />,
-    children: [
-      { path: 'account', element: <AccountView /> },
-      { path: 'customers', element: <CustomerListView /> },
-      { path: 'addblog', element: <AddBlog /> }, ,
-      { path: 'dashboard', element: <DashboardView /> },
-      { path: 'products', element: <ProductListView /> },
-      { path: 'settings', element: <SettingsView /> },
-      { path: '/product/details', element: <Details /> },
-      { path: 'table', element: <Tables /> },
-      { path: 'datetable', element: <DateRangeTable /> },
-      // { path: '*', element: <Navigate to="/404" /> }
-    ]
-  }
 
-];
+const getRoutes = (isProfileCompleted, isAuthenticated) => {
+  return [
+    {
+      path: 'app',
+      element: <PrivateRoute component={<DashboardLayout />} isProfileCompleted={isProfileCompleted} isAuthenticated={isAuthenticated} />,
+      children: [
+        { path: 'account', element: <AccountView /> },
+        { path: 'customers', element: <CustomerListView /> },
+        { path: 'addblog', element: <AddBlog /> }, ,
+        { path: 'dashboard', element: <DashboardView /> },
+        { path: 'products', element: <ProductListView /> },
+        { path: 'brands', element: <Brands /> },
+        { path: 'addBrands', element: <AddBrands /> },
+        { path: 'settings', element: <SettingsView /> },
+        { path: '/product/details', element: <Details /> },
+        { path: 'table', element: <Tables /> },
+        { path: 'datetable', element: <DateRangeTable /> },
+        // { path: '*', element: <Navigate to="/404" /> }
+      ]
+    }
 
-export { routes, homeroute };
+  ];
+}
+
+export { getRoutes, homeroute };

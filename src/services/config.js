@@ -10,21 +10,17 @@ var firebaseConfig = {
   projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   appId: process.env.REACT_APP_APP_ID,
+  messagingSenderId: process.env.REACT_APP_MESSAGIN_SENDER_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+const firebaseAnalytics = firebase.analytics();
 
 const storage = firebase.storage();
 const storeFire = firebase.firestore();
 storeFire.settings({ timestampsInSnapshots: true });
 const auth = firebase.auth()
-console.log(auth)
-//   logout = () => {
-//     firebase.auth().signOut();
-// }
-
-
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export { storage, storeFire, timestamp, firebase, auth as default, auth };
+export { storage, storeFire, timestamp, firebase, firebaseConfig, firebaseAnalytics, auth as default, auth };

@@ -1,4 +1,4 @@
-import React , {useState}from 'react';import 'date-fns';
+import React, { useState } from 'react'; import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -17,42 +17,42 @@ const DateRangePicker = ({
   return (
     <div className="dp-container">
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
-        <KeyboardDatePicker
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="startDate"
-          label="Start date"
-          value={startDate}
-          selected={startDate ? new Date(startDate) : null}
-          onChange={(date) => onDateChangeHandler(date, "startDate")}
-          className={`dp-item ${error["startDate"] ? "dp-item--error" : ""}`}
-          required={true}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
+        <Grid container justify="space-around">
+          <KeyboardDatePicker
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="startDate"
+            label="Start date"
+            value={startDate}
+            selected={startDate ? new Date(startDate) : null}
+            onChange={(date) => onDateChangeHandler(date, "startDate")}
+            className={`dp-item ${error["startDate"] ? "dp-item--error" : ""}`}
+            required={true}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
 
-        <KeyboardDatePicker
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="endDate"
-          label="End date"
-          value={endDate}
-          selected={endDate ? new Date(endDate) : null}
-          onChange={(date) => onDateChangeHandler(date, "endDate")}
-          className={`dp-item ${error["endDate"] ? "dp-item--error" : ""}`}
-          required={true}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-       
-      </Grid>
-    </MuiPickersUtilsProvider>
-      
-      <div className="dp-group">
-        {/* <DatePicker
+          <KeyboardDatePicker
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="endDate"
+            label="End date"
+            value={endDate}
+            selected={endDate ? new Date(endDate) : null}
+            onChange={(date) => onDateChangeHandler(date, "endDate")}
+            className={`dp-item ${error["endDate"] ? "dp-item--error" : ""}`}
+            required={true}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
+
+        </Grid>
+      </MuiPickersUtilsProvider>
+
+      {/* <div className="dp-group"> */}
+      {/* <DatePicker
           id="startDate"
           selected={startDate ? new Date(startDate) : null}
           onChange={(date) => onDateChangeHandler(date, "startDate")}
@@ -72,7 +72,7 @@ const DateRangePicker = ({
           required={true}
         />
         {error["endDate"] && <p className="dp-error">{error["endDate"]}</p>} */}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

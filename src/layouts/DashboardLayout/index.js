@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   wrapper: {
-    backgroundColor: 'red',
     height: '90vh',
     display: 'flex',
     flex: '1 1 auto',
