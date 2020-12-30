@@ -42,7 +42,7 @@ const Toolbar = ({ className, ...rest }) => {
                 <Button className={classes.exportButton}>
                     Export
         </Button>
-                <Link to='/app/addblog'>
+                <Link to='/app/addBrands'>
                     <Button
                         color="primary"
                         variant="contained"
