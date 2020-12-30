@@ -11,6 +11,11 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Pagination } from '@material-ui/lab';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,14 +25,18 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(3)
     },
     productCard: {
-        height: '100%'
+        height: '100%',
+    },
+    skeleton: {
+        flex: '1 0 auto',
     }
 }));
 
 const Brands = () => {
+    const [loading, setLoading] = useState(true)
     const classes = useStyles();
+    const loaderData = [1, 2, 3, 4, 5, 6]
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const fetchMyApi = async () => {
@@ -35,16 +44,17 @@ const Brands = () => {
                 const response = await getRequest('/facts');
                 console.log('fetched api data', response.data)
                 setData(response.data)
-                setLoading(true)
-                console.log('loading', loading)
+                setTimeout(() => setLoading(true), 6000)
+                // setLoading(false)
             }
             catch (error) {
                 console.log(error)
             }
         }
+        console.log('loading-------', loading)
         fetchMyApi()
     }, [])
-
+    console.log('loaded------', loading)
     return (
         <>
             {loading ?
@@ -59,22 +69,45 @@ const Brands = () => {
                                 container
                                 spacing={3}
                             >
-                                {data && data.map(doc => (
+
+                                {loaderData.map(load => (
                                     <Grid
                                         item
-                                        key={doc._id}
                                         lg={4}
                                         md={6}
                                         xs={12}
                                     >
+                                        <Card className={classes.cards}>
+                                            <div >
+                                                <CardContent>
+                                                    <Grid container spacing={2}>
+                                                        <Grid item xs={8}
+                                                        >
+                                                            <Skeleton animation="wave" height={25} />
+                                                            <Skeleton animation="wave" width="80%" />
+                                                            <Grid container style={{ paddingTop: 20 }}>
+                                                                <Grid item xs={3} >
+                                                                    <Skeleton variant="circle" width={30} height={30} />
+                                                                </Grid>
+                                                                <Grid item xs={3}>
+                                                                    <Skeleton variant="circle" width={30} height={30} />
+                                                                </Grid>
+                                                                <Grid item xs={3}>
+                                                                    <Skeleton variant="circle" width={30} height={30} />
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Grid item xs={4} >
+                                                            <Skeleton variant="rect" width='auto' height={90} />
+                                                        </Grid>
+                                                    </Grid>
 
-                                        <BrandCards
-                                            documents={doc}
-                                        />
+                                                </CardContent>
 
+                                            </div>
 
+                                        </Card>
                                     </Grid>
-
                                 ))}
                             </Grid>
                         </Box>
@@ -113,11 +146,9 @@ const Brands = () => {
                                     >
                                         <BrandCards
                                             documents={doc}
+                                            load={loading}
                                         />
-
-
                                     </Grid>
-
                                 ))}
                             </Grid>
                         </Box>
