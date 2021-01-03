@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { addBrands } from '../../services/brands';
@@ -8,7 +9,6 @@ import {
     Box,
     Button,
     Card,
-    CardActions,
     CardContent,
     Container,
     TextField,
@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     pos: {
         marginBottom: 12,
     },
+    resize: {
+        height: 200,
+        width: 200,
+    }
 }));
 
 const initialValues = {
@@ -59,6 +63,8 @@ const validationSchema = Yup.object({
 function AddBrands() {
     const classes = useStyles();
     const dispatch = useDispatch()
+    const wrapperRef = useRef(null)
+    const navigate = useNavigate()
     const top100Films = [
         { title: 'The Shawshank Redemption', year: 1994 },
         { title: 'The Godfather', year: 1972 },
@@ -71,11 +77,13 @@ function AddBrands() {
     const formik = useFormik({
         initialValues,
         onSubmit: async (values, onSubmitProps) => {
+            console.log('entered')
             try {
                 const brandsAdded = await addBrands(values.name, values.type, values.description, values.image)
                 dispatch(setBrands(brandsAdded))
                 alert('Successfully added')
                 onSubmitProps.setSubmitting(false)
+                navigate('/app/brands')
             }
             catch (error) {
                 alert(error)
@@ -110,16 +118,32 @@ function AddBrands() {
                                             variant="h2"
                                         >
                                             Add Brands
-                </Typography>
+                                        </Typography>
                                     </Box>
-                                    {/* <img src={formik.values.photo1} /> */}
+                                    <Card className={classes.resize} variant="outlined"
+                                        onClick={() => wrapperRef.current.click()}>
+                                        <CardContent>
+                                            {formik.values.image &&
+                                                <img className={classes.resize} src={URL.createObjectURL(formik.values.image)} />
+                                            }
+                                            <img className={classes.resize} src='/static/images/placeholder-square.png' alt='Upload a pic' />
+                                        </CardContent>
+                                    </Card>
                                     <Input
                                         type="file"
                                         name="file"
+                                        ref={wrapperRef}
                                         onChange={(event) => {
                                             formik.setFieldValue("image", event.currentTarget.files[0]);
+                                            console.log('event', URL.createObjectURL(event.currentTarget.files[0]))
                                         }}
+                                    // style={{
+                                    //     display: 'none'
+                                    // }}
                                     />
+
+                                    <div>
+                                    </div>
                                     <Autocomplete
                                         id="combo-box-demo"
                                         options={top100Films}
@@ -137,7 +161,6 @@ function AddBrands() {
                                         name="name"
                                         onBlur={formik.handleBlur}
                                         value={formik.values.name}
-
                                         onChange={formik.handleChange}
                                         variant="outlined"
                                     />

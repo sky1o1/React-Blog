@@ -34,8 +34,6 @@ const ProductList = () => {
     getBlog().then(blogList => setData(blogList))
   }, [])
 
-  var user = firebase.auth().currentUser;
-
   return (
     <Page
       className={classes.root}

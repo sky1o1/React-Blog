@@ -1,15 +1,19 @@
 import React from 'react';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
-import IconButton from '@material-ui/core/IconButton';
+import Edit from './crud/Edit';
+import Delete from './crud/Delete';
+import Details from './crud/Details';
 import {
     Card,
     CardContent,
     Typography,
     makeStyles,
-    CardMedia
+    CardMedia,
+    useTheme
 } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,38 +40,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 const BrandCards = ({ className, documents, ...rest }) => {
     const classes = useStyles();
+    const theme = useTheme();
+
     return (
         <>
             <Card className={classes.root}>
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <Typography component="h5" variant="h5">
-                            {documents._id}
+                            {documents.name}
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
                             {documents.type}
                         </Typography>
                     </CardContent>
                     <div className={classes.controls}>
-                        <IconButton >
-                            <DeleteOutlineIcon />
-                        </IconButton>
-                        <IconButton >
-                            <EditOutlinedIcon />
-                        </IconButton>
-                        <IconButton >
-                            <VisibilityOutlinedIcon />
-                        </IconButton>
-
+                        <Delete id={documents.id} docs={documents} />
+                        <Edit id={documents.id} docs={documents} />
+                        <Details id={documents.id} docs={documents} />
                     </div>
                 </div>
-                <CardMedia
-                    className={classes.cover}
-                    src="https://play.google.com/store/apps/details?id=com.google.android.apps.searchlite&hl=en&gl=US"
-                    title="Live from space album cover"
 
+                <img
+                    className={classes.cover}
+                    src={documents.imageUrl}
+                    alt='documents.imageName'
                 />
             </Card>
+
+
+
             {/* <Card className={classes.root}>
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
