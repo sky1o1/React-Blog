@@ -34,7 +34,7 @@ const uploadImage = (image) => {
 export const getBlog = async () => {
     try {
         const docList = await storeFire.collection('Blogs').orderBy('createdAt').get();
-        console.log(docList)
+        console.log('docs list', docList)
         return docList.docs.map(doc => doc.data())
     }
     catch (error) {

@@ -15,11 +15,8 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
-  Checkbox,
   Container,
-  FormHelperText,
   Link,
   TextField,
   Typography,
@@ -120,7 +117,6 @@ const RegisterView = () => {
                     Create your profile
                 </Typography>
                 </Box>
-                {/* <img src={formik.values.photo1} /> */}
                 <Input
                   type="file"
                   name="file"

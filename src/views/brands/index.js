@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import BrandCards from './Brands'
-import { getRequest } from '../../config/axios.config'
+import BrandCards from './Brands';
+import { getRequest } from '../../config/axios.config';
+import { getBrands } from '../../services/brands';
 import {
     Box,
     Container,
@@ -39,22 +40,20 @@ const Brands = () => {
     const [data, setData] = useState([])
 
     useEffect(() => {
+        // getBrands().then(brandList => setData(brandList));
+        // setLoading(false);
         const fetchMyApi = async () => {
             try {
-                const response = await getRequest('/facts');
-                console.log('fetched api data', response.data)
-                setData(response.data)
-                setTimeout(() => setLoading(true), 6000)
-                // setLoading(false)
+                const response = await getBrands();
+                setData(response);
+                setLoading(false)
             }
             catch (error) {
                 console.log(error)
             }
         }
-        console.log('loading-------', loading)
         fetchMyApi()
     }, [])
-    console.log('loaded------', loading)
     return (
         <>
             {loading ?
@@ -139,14 +138,13 @@ const Brands = () => {
                                 {data && data.map(doc => (
                                     <Grid
                                         item
-                                        key={doc._id}
+                                        key={doc.id}
                                         lg={4}
                                         md={6}
                                         xs={12}
                                     >
                                         <BrandCards
                                             documents={doc}
-                                            load={loading}
                                         />
                                     </Grid>
                                 ))}
