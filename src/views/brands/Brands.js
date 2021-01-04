@@ -8,43 +8,35 @@ import {
     Typography,
     makeStyles,
     CardMedia,
-    useTheme
 } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
 
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexDirection: 'column'
     },
     details: {
         display: 'flex',
         flexDirection: 'column',
     },
-    content: {
-        flex: '1 0 auto',
-    },
     cover: {
-        width: 151,
+        width: '100%',
+
     },
     controls: {
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
     },
 }));
+
+
 const BrandCards = ({ className, documents, ...rest }) => {
     const classes = useStyles();
-    const theme = useTheme();
 
     return (
         <>
-            <Card className={classes.root}>
+            {/* <Card className={classes.root}>
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <Typography component="h5" variant="h5">
@@ -61,37 +53,52 @@ const BrandCards = ({ className, documents, ...rest }) => {
                     </div>
                 </div>
 
-                <img
+                <CardMedia
                     className={classes.cover}
-                    src={documents.imageUrl}
+                    image={documents.imageUrl}
                     alt='documents.imageName'
                 />
-            </Card>
+            </Card> */}
+            <Card className={classes.cards}>
+                <div >
+                    <CardContent style={{ paddingBottom: 12 }}>
+                        <Grid container spacing={2} style={{ padding: 0 }}>
+                            <Grid item xs={7}
+                            >
+                                <Typography component="h5" variant="h5">
+                                    {documents.name}
+                                </Typography>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {documents.type}
+                                </Typography>
+                                {/* <Skeleton animation="wave" height={25} /> */}
+                                {/* <Skeleton animation="wave" width="80%" /> */}
+                                <Grid container style={{ paddingTop: 0 }}>
+                                    <Grid item xs={3} >
+                                        <Delete id={documents.id} docs={documents} />
+                                        {/* <Skeleton variant="circle" width={30} height={30} /> */}
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Edit id={documents.id} docs={documents} />
+                                        {/* <Skeleton variant="circle" width={30} height={30} /> */}
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Details id={documents.id} docs={documents} />
+                                        {/* <Skeleton variant="circle" width={30} height={30} /> */}
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={5} >
+                                <img src={documents.imageUrl} style={{ width: '100%', height: '100px' }} />
+                                {/* <Skeleton variant="rect" width='auto' height={90} /> */}
+                            </Grid>
+                        </Grid>
 
-
-
-            {/* <Card className={classes.root}>
-                <div className={classes.details}>
-                    <CardContent className={classes.content}>
-                        <CardMedia
-                            className={classes.cover}
-                            image="/static/images/cards/live-from-space.jpg"
-                        />
-                        <Typography component="h5" variant="h5">
-                            Name:
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                            Type:{documents.type}
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                            Description:{documents.text}
-                        </Typography>
                     </CardContent>
-                    <div className={classes.controls}>
-                    </div>
+
                 </div>
 
-            </Card> */}
+            </Card>
         </>
     );
 };
