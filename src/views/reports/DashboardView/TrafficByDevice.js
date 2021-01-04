@@ -103,7 +103,7 @@ const TrafficByDevice = ({ className, ...rest }) => {
             data={data}
             options={options}
           /> */}
-          <iframe width="400" height="300" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTJh6qG3Dfpo9i4HHY3TB_FDQ2LxfadhXnacv3Qmtq1TmXWrJ07qxGVh6DadvD7bgRU_J1sYtuHnTdU/pubchart?oid=826692676&amp;format=interactive"></iframe>
+          <iframe width="400" height="300" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTJh6qG3Dfpo9i4HHY3TB_FDQ2LxfadhXnacv3Qmtq1TmXWrJ07qxGVh6DadvD7bgRU_J1sYtuHnTdU/pubchart?oid=1987227009&amp;format=interactive"></iframe>
         </Box>
         {/* <Box
           display="flex"

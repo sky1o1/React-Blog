@@ -122,7 +122,7 @@ const Sales = ({ className, ...rest }) => {
             data={data}
             options={options}
           /> */}
-          <iframe style={{ width: '100%', height: '100%' }} seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTJh6qG3Dfpo9i4HHY3TB_FDQ2LxfadhXnacv3Qmtq1TmXWrJ07qxGVh6DadvD7bgRU_J1sYtuHnTdU/pubchart?oid=1872990893&amp;format=interactive"></iframe>
+          <iframe style={{ width: '100%', height: '100%' }} seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTJh6qG3Dfpo9i4HHY3TB_FDQ2LxfadhXnacv3Qmtq1TmXWrJ07qxGVh6DadvD7bgRU_J1sYtuHnTdU/pubchart?oid=1453254030&amp;format=interactive"></iframe>
         </Box>
       </CardContent>
       <Divider />

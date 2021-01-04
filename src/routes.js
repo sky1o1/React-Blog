@@ -26,7 +26,7 @@ const homeroute = [
     children: [
       { path: 'login', element: <LoginView /> },
       { path: 'register', element: <RegisterView /> },
-      // { path: '404', element: <NotFoundView /> },
+      { path: '404', element: <NotFoundView /> },
       { path: '/', element: <Navigate to="/app/dashboard" /> },
       // { path: '*', element: <Navigate to="/404" /> }
     ]

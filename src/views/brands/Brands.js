@@ -75,7 +75,8 @@ const BrandCards = ({ className, documents, ...rest }) => {
                                 {/* <Skeleton animation="wave" width="80%" /> */}
                                 <Grid container style={{ paddingTop: 0 }}>
                                     <Grid item xs={3} >
-                                        <Delete id={documents.id} docs={documents} />
+                                        <Details id={documents.id} docs={documents} />
+
                                         {/* <Skeleton variant="circle" width={30} height={30} /> */}
                                     </Grid>
                                     <Grid item xs={3}>
@@ -83,7 +84,7 @@ const BrandCards = ({ className, documents, ...rest }) => {
                                         {/* <Skeleton variant="circle" width={30} height={30} /> */}
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Details id={documents.id} docs={documents} />
+                                        <Delete id={documents.id} docs={documents} />
                                         {/* <Skeleton variant="circle" width={30} height={30} /> */}
                                     </Grid>
                                 </Grid>

@@ -14,7 +14,7 @@ import {
     TextField,
     Typography,
     makeStyles,
-    Input
+    TextareaAutosize
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -183,7 +183,7 @@ function AddBrands() {
                                         fullWidth
                                         id="type"
                                         helperText={formik.touched.type && formik.errors.type}
-                                        label="type"
+                                        label="Type"
                                         margin="normal"
                                         name="type"
                                         onBlur={formik.handleBlur}
@@ -193,6 +193,10 @@ function AddBrands() {
                                         variant="outlined"
                                     />
                                     <TextField
+                                        id="description"
+                                        label="Multiline"
+                                        multiline
+                                        rows={4}
                                         error={Boolean(formik.touched.description && formik.errors.description)}
                                         fullWidth
                                         helperText={formik.touched.description && formik.errors.description}

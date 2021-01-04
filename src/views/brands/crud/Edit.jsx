@@ -55,14 +55,14 @@ function Edit({ docs }) {
         imageUrl: imageUrl,
         imageName: imageName
     }
-    console.log('docs ko data', docs)
+
     const formik = useFormik({
         initialValues,
         onSubmit: async (values) => {
             try {
                 const brandsUpdated = await updateBrands(id, values.name, values.type, values.description, values.image)
                 dispatch(setBrands(brandsUpdated))
-                navigate('/app/addBrands')
+                navigate('/app/brands')
             }
             catch (error) {
                 alert(error)
@@ -146,6 +146,9 @@ function Edit({ docs }) {
                             fullWidth
                         />
                         <TextField
+                            label="Multiline"
+                            multiline
+                            rows={4}
                             autoFocus
                             margin="dense"
                             id="description"
