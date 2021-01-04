@@ -54,9 +54,8 @@ export const updateBrands = async (id, name, type, description, image) => {
         // update brands to firestore
         console.log('id for update', id)
         const collectionRef = storeFire.collection('Brands');
-        await collectionRef.doc(id).update(brandDocument).then(() => {
-            alert('Succesfully updated')
-        });
+        await collectionRef.doc(id).update(brandDocument)
+        alert('Succesfully updated')
         return brandDocument
     }
     catch (error) {

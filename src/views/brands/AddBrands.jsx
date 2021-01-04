@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -21,7 +21,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // height: '100%',
         paddingBottom: theme.spacing(5),
         paddingTop: theme.spacing(5),
         paddingLeft: theme.spacing(5),
@@ -62,6 +61,7 @@ const validationSchema = Yup.object({
 
 function AddBrands() {
     const classes = useStyles();
+    const [img, setImg] = useState('/static/images/placeholder-square.png')
     const dispatch = useDispatch()
     const wrapperRef = useRef(null)
     const navigate = useNavigate()
@@ -74,6 +74,7 @@ function AddBrands() {
         { title: "Schindler's List", year: 1993 },
         { title: 'Pulp Fiction', year: 1994 },
     ];
+
     const formik = useFormik({
         initialValues,
         onSubmit: async (values, onSubmitProps) => {
@@ -92,6 +93,7 @@ function AddBrands() {
         },
         validationSchema,
     })
+
     return (
         <>
             <Page
@@ -120,35 +122,47 @@ function AddBrands() {
                                             Add Brands
                                         </Typography>
                                     </Box>
-                                    <Card className={classes.resize} variant="outlined"
-                                        onClick={() => wrapperRef.current.click()}>
-                                        <CardContent>
-                                            {formik.values.image &&
+                                    <div className={classes.resize} variant="outlined"
+                                        onClick={() => {
+                                            wrapperRef.current.click()
+                                        }} >
+                                        <div>
+                                            {/* {formik.values.image &&
                                                 <img className={classes.resize} src={URL.createObjectURL(formik.values.image)} />
+                                            } */}
+                                            {formik.values.image ?
+                                                (formik.values.image &&
+                                                    <img className={classes.resize} src={URL.createObjectURL(formik.values.image)} />) :
+                                                <img className={classes.resize} src={img} alt='Upload a pic' />
+
                                             }
-                                            <img className={classes.resize} src='/static/images/placeholder-square.png' alt='Upload a pic' />
-                                        </CardContent>
-                                    </Card>
-                                    <Input
+
+                                        </div>
+                                    </div>
+                                    <input
                                         type="file"
                                         name="file"
                                         ref={wrapperRef}
                                         onChange={(event) => {
                                             formik.setFieldValue("image", event.currentTarget.files[0]);
-                                            console.log('event', URL.createObjectURL(event.currentTarget.files[0]))
-                                        }}
-                                    // style={{
-                                    //     display: 'none'
-                                    // }}
-                                    />
+                                            {
+                                                formik.values.image &&
+                                                    setImg(URL.createObjectURL(formik.values.image))
+                                            }
 
+                                        }}
+                                        style={{
+                                            display: 'none'
+                                        }}
+
+                                    />
                                     <div>
                                     </div>
                                     <Autocomplete
                                         id="combo-box-demo"
                                         options={top100Films}
                                         getOptionLabel={(option) => option.title}
-                                        style={{ width: 300 }}
+                                        style={{ width: 300, paddingTop: 50 }}
                                         renderInput={(params) => <TextField {...params} label="Type" variant="outlined" />}
                                     />
                                     <TextField

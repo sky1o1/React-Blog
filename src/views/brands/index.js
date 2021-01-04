@@ -80,7 +80,7 @@ const Brands = () => {
                                             <div >
                                                 <CardContent>
                                                     <Grid container spacing={2}>
-                                                        <Grid item xs={8}
+                                                        <Grid item xs={7}
                                                         >
                                                             <Skeleton animation="wave" height={25} />
                                                             <Skeleton animation="wave" width="80%" />
@@ -96,8 +96,8 @@ const Brands = () => {
                                                                 </Grid>
                                                             </Grid>
                                                         </Grid>
-                                                        <Grid item xs={4} >
-                                                            <Skeleton variant="rect" width='auto' height={90} />
+                                                        <Grid item xs={5} >
+                                                            <Skeleton variant="rect" width='auto' style={{ height: 100 }} />
                                                         </Grid>
                                                     </Grid>
 

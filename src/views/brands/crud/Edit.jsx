@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -22,14 +22,24 @@ import {
     makeStyles,
     Input
 } from '@material-ui/core';
+// import classes from '*.module.css';
 
+const useStyles = makeStyles((theme) => ({
+    imgContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+    }
+}));
 
 function Edit({ docs }) {
+    const classes = useStyles();
     const [open, setOpen] = useState(false);
-    const [data, setData] = useState({ docs })
-    const [id, setId] = useState(data.docs.id)
-    const navigate = useNavigate()
+    const { id, name, type, description, image, imageUrl, imageName } = docs
+    console.log(imageName)
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const wrapperRef = useRef(null)
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -38,12 +48,14 @@ function Edit({ docs }) {
     };
 
     const initialValues = {
-        name: data.docs.name,
-        type: data.docs.type,
-        description: data.docs.description,
-        image: data.docs.imageUrl,
+        name: name,
+        type: type,
+        description: description,
+        image: image,
+        imageUrl: imageUrl,
+        imageName: imageName
     }
-
+    console.log('docs ko data', docs)
     const formik = useFormik({
         initialValues,
         onSubmit: async (values) => {
@@ -68,33 +80,48 @@ function Edit({ docs }) {
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Edit</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
+                    {/* <DialogContentText>
                         To subscribe to this website, please enter your email address here. We will send updates
                         occasionally.
-                    </DialogContentText>
+                    </DialogContentText> */}
                     <form onSubmit={formik.handleSubmit} >
-                        <CardContent>
-                            <img style={{
+                        <div className={classes.imgContainer} onClick={() => {
+                            wrapperRef.current.click()
+                            console.log('entered')
+                        }}>
+                            {/* <img style={{
                                 height: 200,
                                 width: 200
-                            }} src={data.docs.imageUrl} alt={data.docs.imageName} />
+                            }} src={imageUrl} alt={imageName} /> */}
 
-                            {/* {formik.values.image &&
+                            {formik.values.image ?
+                                (formik.values.image &&
+                                    <img
+                                        style={{
+                                            height: 200,
+                                            width: 200
+                                        }}
+                                        src={URL.createObjectURL(formik.values.image)}
+                                    />) :
                                 <img style={{
                                     height: 200,
                                     width: 200
-                                }} src={URL.createObjectURL(formik.values.image)} />
-                            } */}
-                            <img style={{
-                                height: 200,
-                                width: 200
-                            }} src='/static/images/placeholder-square.png' alt='Upload a pic' />
-                        </CardContent>
-                        <Input
+                                }} src={imageUrl} alt={imageName} />
+
+
+                            }
+
+
+                        </div>
+                        <input
                             type="file"
                             name="file"
+                            ref={wrapperRef}
                             onChange={(event) => {
                                 formik.setFieldValue("image", event.currentTarget.files[0]);
+                            }}
+                            style={{
+                                display: 'none'
                             }}
                         />
                         <TextField

@@ -31,8 +31,8 @@ const Details = ({ docs }) => {
             >
                 <DialogTitle id="alert-dialog-title"> {docs.name}</DialogTitle>
                 <img style={{
-                    height: 200,
-                    width: 200
+                    height: 250,
+                    width: 250
                 }} src={docs.imageUrl} alt={docs.imageName} />
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
