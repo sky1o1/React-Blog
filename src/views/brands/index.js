@@ -150,7 +150,7 @@ const Brands = () => {
                                 ))}
                             </Grid>
                         </Box>
-                        <Box
+                        {/* <Box
                             mt={3}
                             display="flex"
                             justifyContent="center"
@@ -160,7 +160,7 @@ const Brands = () => {
                                 count={3}
                                 size="small"
                             />
-                        </Box>
+                        </Box> */}
                     </Container>
                 </Page>
             }
