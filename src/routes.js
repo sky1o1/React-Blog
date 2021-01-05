@@ -13,7 +13,10 @@ import RegisterView from 'src/views/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
 import AddBlog from 'src/views/blog/AddBlog';
 import Brands from 'src/views/brands/';
-import AddBrands from 'src/views/brands/AddBrands'
+import AddBrands from 'src/views/brands/AddBrands';
+import AddProducts from 'src/views/products/crud/AddProducts';
+import Products from 'src/views/products/';
+import ViewProducts from 'src/views/products/viewProduct';
 import Details from './views/product/Details';
 import Tables from './views/Table/Table';
 import DateRangeTable from './views/Table/DateRangeTable';
@@ -44,7 +47,10 @@ const getRoutes = (isProfileCompleted, isAuthenticated) => {
         { path: 'customers', element: <CustomerListView /> },
         { path: 'addblog', element: <AddBlog /> }, ,
         { path: 'dashboard', element: <DashboardView /> },
-        { path: 'products', element: <ProductListView /> },
+        { path: 'blogs', element: <ProductListView /> },
+        { path: 'addProducts', element: <AddProducts /> },
+        { path: 'listProducts', element: <Products /> },
+        { path: 'viewProducts', element: <ViewProducts /> },
         { path: 'brands', element: <Brands /> },
         { path: 'addBrands', element: <AddBrands /> },
         { path: 'settings', element: <SettingsView /> },

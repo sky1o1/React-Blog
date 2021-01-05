@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import BrandCards from './Brands';
-import { getRequest } from '../../config/axios.config';
 import { getBrands } from '../../services/brands';
 import {
     Box,
@@ -14,8 +13,6 @@ import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +42,7 @@ const Brands = () => {
         const fetchMyApi = async () => {
             try {
                 const response = await getBrands();
+                console.log('brancds list', response)
                 setData(response);
                 setLoading(false)
             }
@@ -110,17 +108,6 @@ const Brands = () => {
                                 ))}
                             </Grid>
                         </Box>
-                        <Box
-                            mt={3}
-                            display="flex"
-                            justifyContent="center"
-                        >
-                            <Pagination
-                                color="primary"
-                                count={3}
-                                size="small"
-                            />
-                        </Box>
                     </Container>
                 </Page>
                 :
@@ -150,17 +137,6 @@ const Brands = () => {
                                 ))}
                             </Grid>
                         </Box>
-                        {/* <Box
-                            mt={3}
-                            display="flex"
-                            justifyContent="center"
-                        >
-                            <Pagination
-                                color="primary"
-                                count={3}
-                                size="small"
-                            />
-                        </Box> */}
                     </Container>
                 </Page>
             }

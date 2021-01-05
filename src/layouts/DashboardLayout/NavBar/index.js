@@ -49,18 +49,31 @@ const items = [
     title: 'Addblog'
   },
   {
-    href: '/app/products',
+    href: '/app/blogs',
     icon: ShoppingBagIcon,
-    title: 'Products'
-  }, {
-    href: '/app/brands',
-    icon: ShoppingBagIcon,
-    title: 'Brands'
-  }, {
+    title: 'Blogs'
+  },
+  {
     href: '/app/addBrands',
     icon: TableChartIcon,
     title: 'Add Brands'
-  }, {
+  },
+  {
+    href: '/app/brands',
+    icon: ShoppingBagIcon,
+    title: 'Brands'
+  },
+  {
+    href: '/app/listProducts',
+    icon: ShoppingBagIcon,
+    title: 'Products'
+  },
+  {
+    href: '/app/viewProducts',
+    icon: ShoppingBagIcon,
+    title: 'View Products'
+  },
+  {
     href: '/app/table',
     icon: TableChartIcon,
     title: 'Tables'
